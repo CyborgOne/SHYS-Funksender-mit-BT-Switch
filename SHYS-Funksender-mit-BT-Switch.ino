@@ -238,7 +238,7 @@ void switchBT(char btLearnCode[], int unitNr, char action[]){
  * 51-306  = Intertechno 433MHz Drehrad-Kodierung von A-01 bis P-16
  * 307-386 = Intertechno BT-Switch 
  */
-void switchWirelessOutlet(int number){
+void switchWirelessOutlet(long number){
    switchWirelessOutlet(number, 0);
 }
 
@@ -250,7 +250,7 @@ void switchOnOff( char switchCode, int switchId, boolean switchOn, int numberStk
   }
 }
 
-void switchWirelessOutlet(int number, int dimm){
+void switchWirelessOutlet(long number, int dimm){
   mySwitch.disableReceive();
 
   if(serialOut){
@@ -270,7 +270,7 @@ void switchWirelessOutlet(int number, int dimm){
   if (numberStkIT == 0) numberStkIT = 4;
   if (numberStkIT < 0) numberStkIT = numberStkIT*(-1);
   
-  int switchNr = number>=0?number:number * (-1);
+  long switchNr = number>=0?number:number * (-1);
   
   int switchId = 0;
   boolean switchOn = true;
@@ -431,9 +431,9 @@ void postRawCmd(EthernetClient client, char* anschluss){
     
   client.println(F( "<h4> Funk schalten</h4><br/>" ));
   if(atoi(rawCmdDimmLevel)>0 && atoi(rawCmdDimmLevel)<17){
-    switchWirelessOutlet(atoi(anschluss), atoi(rawCmdDimmLevel));
+    switchWirelessOutlet(atol(anschluss), atoi(rawCmdDimmLevel));
   } else {
-    switchWirelessOutlet(atoi(anschluss));
+    switchWirelessOutlet(atol(anschluss));
   }
   
   showFooter(client);
