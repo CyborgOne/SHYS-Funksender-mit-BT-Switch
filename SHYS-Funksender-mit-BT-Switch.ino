@@ -276,7 +276,9 @@ void switchWirelessOutlet(int number, int dimm){
   boolean switchOn = true;
   
   //Intertechno BT-Switch
-  if (switchNr > 370 && switchNr <= 386){
+  if (switchNr > 10000) {
+    mySwitch.send(switchNr , 24);
+  } else if (switchNr > 370 && switchNr <= 386){
     switchBT(btLearnCode5, (switchNr-370), (dimm>0&&dimm<17)?dimmLevel:(number<0?off:on));
   } else if (switchNr > 354){
     switchBT(btLearnCode4, (switchNr-354), (dimm>0&&dimm<17)?dimmLevel:(number<0?off:on));
